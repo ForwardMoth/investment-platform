@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MyUserDetails implements UserDetailsService {
@@ -17,15 +19,15 @@ public class MyUserDetails implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        final User user = userRepository.findByEmail(username);
+        final Optional<User> user = userRepository.findByEmail(username);
 
-        if (user == null) {
+        if (user.isEmpty()) {
             throw new UsernameNotFoundException("User '" + username + "' not found");
         }
 
         return org.springframework.security.core.userdetails.User//
                 .withUsername(username)//
-                .password(user.getPassword())//
+                .password(user.get().getPassword())//
                 .accountExpired(false)//
                 .accountLocked(false)//
                 .credentialsExpired(false)//
