@@ -5,12 +5,13 @@ spring:
     password: ${DB_PASSWORD}
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: create-drop
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 
-app:
-  secret-key: ${SECRET_KEY}
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET}
+    expiration-time: ${JWT_LIFETIME}
