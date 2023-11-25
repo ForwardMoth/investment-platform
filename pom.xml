@@ -72,13 +72,11 @@
       <artifactId>spring-security-test</artifactId>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>org.testng</groupId>
-          <artifactId>testng</artifactId>
-          <version>RELEASE</version>
-          <scope>compile</scope>
-      </dependency>
-
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+      <version>4.22.0</version>
+    </dependency>
 
   </dependencies>
 
