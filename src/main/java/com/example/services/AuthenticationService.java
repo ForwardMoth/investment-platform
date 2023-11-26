@@ -1,5 +1,6 @@
 package com.example.services;
 
+import com.example.dto.LoginResponse;
 import com.example.dto.LoginUserDto;
 import com.example.dto.RegisterUserDto;
 import com.example.entities.User;
@@ -14,17 +15,30 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationService {
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
-
+    private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
     public User signup(RegisterUserDto input) {
-        User user = new User();
-        user.setEmail(input.getEmail());
-        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        String email = input.getEmail();
+        if (!userRepository.existsByEmail(email)) {
+            User user = new User();
+            user.setEmail(input.getEmail());
+            user.setPassword(passwordEncoder.encode(input.getPassword()));
+            return userRepository.save(user);
+        }
+        return null;
+    }
 
-        return userRepository.save(user);
+    public LoginResponse signip(LoginUserDto loginUserDto) {
+        User authenticatedUser = authenticate(loginUserDto);
+
+        String jwtToken = jwtService.generateToken(authenticatedUser);
+
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setToken(jwtToken);
+        loginResponse.setExpiresIn(jwtService.getExpirationTime());
+        return loginResponse;
     }
 
     public User authenticate(LoginUserDto input) {
