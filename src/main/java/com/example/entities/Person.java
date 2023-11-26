@@ -29,5 +29,5 @@ public class Person {
     private Date dateOfBirth;
 
     @OneToMany(mappedBy = "person")
-    private Set<BrokerAccount> accounts;
+    private Set<Account> accounts;
 }

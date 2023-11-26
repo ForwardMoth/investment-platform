@@ -3,6 +3,8 @@ package com.example.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name ="securities")
@@ -23,4 +25,10 @@ public class Security {
 
     @Column(name = "price", nullable = false)
     private long price;
+
+    @OneToMany(mappedBy = "security")
+    private Set<AccountSecurity> accountSecurities;
+
+    @OneToMany(mappedBy = "security")
+    private Set<Payment> payments;
 }
