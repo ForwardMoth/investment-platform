@@ -4,6 +4,7 @@ import com.example.dto.LoginResponse;
 import com.example.dto.LoginUserDto;
 import com.example.dto.RegisterUserDto;
 import com.example.entities.User;
+import com.example.exceptions.AuthException;
 import com.example.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,13 +22,14 @@ public class AuthenticationService {
 
     public User signup(RegisterUserDto input) {
         String email = input.getEmail();
-        if (!userRepository.existsByEmail(email)) {
-            User user = new User();
-            user.setEmail(input.getEmail());
-            user.setPassword(passwordEncoder.encode(input.getPassword()));
-            return userRepository.save(user);
+        if (userRepository.existsByEmail(email)) {
+            throw AuthException.CODE.EMAIL_IN_USE.get();
         }
-        return null;
+
+        User user = new User();
+        user.setEmail(input.getEmail());
+        user.setPassword(passwordEncoder.encode(input.getPassword()));
+        return userRepository.save(user);
     }
 
     public LoginResponse signip(LoginUserDto loginUserDto) {
