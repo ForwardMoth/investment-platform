@@ -3,10 +3,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
 
-    <changeSet id="create-table-users" author="ForwardMoth">
-        <createTable tableName="users">
+    <changeSet id="create-table-clients" author="ForwardMoth">
+        <createTable tableName="client">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="client_pkey"/>
             </column>
             <column name="email" type="varchar(100)">
                 <constraints nullable="false"/>
