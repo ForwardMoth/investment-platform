@@ -31,11 +31,9 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientMapper.toEntity(clientDto);
         client.setPassword(encoder.encode(client.getPassword()));
         client.setEmail(client.getEmail());
-
         if (clientRepository.existsByEmail(client.getEmail())) {
             throw AuthException.CODE.EMAIL_IN_USE.get();
         }
-
         clientRepository.save(client);
         return clientMapper.toDto(client);
     }

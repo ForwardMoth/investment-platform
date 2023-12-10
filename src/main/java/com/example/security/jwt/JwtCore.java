@@ -1,6 +1,5 @@
 package com.example.security.jwt;
 
-import com.example.domain.dto.security.JwtResponse;
 import com.example.domain.entity.Client;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;

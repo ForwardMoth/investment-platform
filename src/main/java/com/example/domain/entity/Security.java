@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name ="securities")
+@Table(name ="security")
 public class Security {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

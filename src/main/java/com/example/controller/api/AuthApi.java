@@ -2,9 +2,9 @@ package com.example.controller.api;
 
 
 import com.example.domain.dto.client.CreateClientDto;
-import com.example.domain.dto.security.JwtResponse;
-import com.example.domain.dto.security.LoginUserDto;
-import com.example.domain.dto.security.RefreshJwtRequest;
+import com.example.domain.dto.auth.JwtResponse;
+import com.example.domain.dto.auth.LoginUserDto;
+import com.example.domain.dto.auth.RefreshJwtRequest;
 import com.example.exception.message.ClientErrorMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

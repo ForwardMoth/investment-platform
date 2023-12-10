@@ -1,8 +1,8 @@
 package com.example.security.service;
 
 import com.example.domain.dto.client.CreateClientDto;
-import com.example.domain.dto.security.JwtResponse;
-import com.example.domain.dto.security.LoginUserDto;
+import com.example.domain.dto.auth.JwtResponse;
+import com.example.domain.dto.auth.LoginUserDto;
 import com.example.domain.entity.Client;
 import com.example.domain.mapper.ClientMapper;
 import com.example.exception.AuthException;

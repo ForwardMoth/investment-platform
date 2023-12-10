@@ -1,4 +1,4 @@
-package com.example.domain.dto.security;
+package com.example.domain.dto.auth;
 
 import lombok.Data;
 

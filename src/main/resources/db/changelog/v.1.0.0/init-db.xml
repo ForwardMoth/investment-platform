@@ -35,10 +35,10 @@
         </createTable>
     </changeSet>
 
-    <changeSet id="create-table-securities" author="ForwardMoth">
-        <createTable tableName="securities">
+    <changeSet id="create-table-security" author="ForwardMoth">
+        <createTable tableName="security">
             <column name="id" type="bigint" autoIncrement="true">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="securities_pkey"/>
+                <constraints nullable="false" primaryKey="true" primaryKeyName="security_pkey"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
