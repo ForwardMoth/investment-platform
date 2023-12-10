@@ -6,7 +6,8 @@ import lombok.Getter;
 public class SecurityException extends RuntimeException{
     @Getter
     public enum CODE {
-        TICKER_IN_USE("Security with such ticker existed");
+        TICKER_IN_USE("Security with such ticker existed"),
+        NO_SUCH_SECURITY("Security with such id is not found");
 
         final String codeDescription;
 

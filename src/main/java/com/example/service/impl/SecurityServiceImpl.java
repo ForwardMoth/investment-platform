@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @RequiredArgsConstructor
 @Transactional
@@ -29,5 +31,40 @@ public class SecurityServiceImpl implements SecurityService {
         }
         securityRepository.save(security);
         return securityMapper.toDto(security);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public SecurityResponseDto findOne(Long id) {
+        return securityMapper.toDto(securityRepository
+                .findById(id)
+                .orElseThrow(SecurityException.CODE.NO_SUCH_SECURITY::get));
+
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<SecurityResponseDto> findAll() {
+        return securityRepository.findAll().stream().map(securityMapper::toDto).toList();
+    }
+
+    @Override
+    @Transactional
+    public SecurityResponseDto update(Long id, SecurityRequestDto securityRequestDto) {
+        return securityRepository.findById(id)
+                .map(existingEvent -> {
+                        securityMapper.partialUpdate(existingEvent, securityMapper.toResponse(securityRequestDto));
+                        return existingEvent;
+                    })
+                .map(securityRepository::save)
+                .map(securityMapper::toDto)
+                .orElseThrow(SecurityException.CODE.NO_SUCH_SECURITY::get);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        securityRepository.findById(id)
+                .ifPresent(securityRepository::delete);
     }
 }

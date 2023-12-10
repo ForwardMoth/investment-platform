@@ -16,6 +16,7 @@ public class SecurityExceptionHandler {
         SecurityException.CODE code = e.getCode();
         HttpStatus status = switch (code) {
             case TICKER_IN_USE -> HttpStatus.CONFLICT;
+            case NO_SUCH_SECURITY -> HttpStatus.NOT_FOUND;
         };
         String codeStr = code.toString();
         log.error(e.getMessage());
